@@ -6,20 +6,25 @@ export class MsgPermit extends JSONSerializable<
     MsgPermit.Proto
 > {
 
-  constructor(){
+  constructor(
+    public execute_msg: object
+  ){
       super();
   }
 
   public static fromAmino(data: MsgPermit.Amino): MsgPermit{
-    return new MsgPermit();
+    return new MsgPermit({});
   }
 
   public toAmino(): MsgPermit.Amino{
-    return {};
+    return {
+      type: 'signature_proof',
+      value: this.execute_msg
+    };
   }
 
   public static fromData(data: MsgPermit.Data): MsgPermit{
-    return new MsgPermit();
+    return new MsgPermit({});
   }
 
   public toData(): MsgPermit.Data{
@@ -27,7 +32,7 @@ export class MsgPermit extends JSONSerializable<
   }
 
   public static fromProto(data: MsgPermit.Proto): MsgPermit{
-    return new MsgPermit();
+    return new MsgPermit({});
   }
 
   public toProto(): MsgPermit.Proto{
