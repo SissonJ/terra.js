@@ -48,6 +48,9 @@ export * from './oracle/msgs';
 export * from './oracle/AggregateExchangeRatePrevote';
 export * from './oracle/AggregateExchangeRateVote';
 
+// Permit
+export * from './permits/msgs';
+
 // Parameters
 export * from './params/proposals';
 export * from './params/ParamChange';

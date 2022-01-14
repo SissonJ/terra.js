@@ -1,4 +1,5 @@
 import { BankMsg, MsgMultiSend, MsgSend } from './bank/msgs';
+import { MsgPermit, PermitMsg } from './permits/msgs'
 import {
   DistributionMsg,
   MsgSetWithdrawAddress,
@@ -88,6 +89,7 @@ export type Msg =
   | MarketMsg
   | MsgAuthMsg
   | OracleMsg
+  | PermitMsg
   | SlashingMsg
   | StakingMsg
   | WasmMsg
@@ -105,6 +107,7 @@ export namespace Msg {
     | MarketMsg.Amino
     | MsgAuthMsg.Amino
     | OracleMsg.Amino
+    | PermitMsg.Amino
     | SlashingMsg.Amino
     | StakingMsg.Amino
     | WasmMsg.Amino
@@ -118,6 +121,7 @@ export namespace Msg {
     | MarketMsg.Data
     | MsgAuthMsg.Data
     | OracleMsg.Data
+    | PermitMsg.Data
     | SlashingMsg.Data
     | StakingMsg.Data
     | WasmMsg.Data
@@ -134,6 +138,7 @@ export namespace Msg {
     | MarketMsg.Proto
     | MsgAuthMsg.Proto
     | OracleMsg.Proto
+    | PermitMsg.Proto
     | SlashingMsg.Proto
     | StakingMsg.Proto
     | WasmMsg.Proto
@@ -197,6 +202,10 @@ export namespace Msg {
         return MsgAggregateExchangeRatePrevote.fromAmino(data);
       case 'oracle/MsgAggregateExchangeRateVote':
         return MsgAggregateExchangeRateVote.fromAmino(data);
+
+      //permit
+      case 'signature_proof':
+        return MsgPermit.fromAmino(data);
 
       // slashing
       case 'slashing/MsgUnjail':
@@ -290,6 +299,10 @@ export namespace Msg {
         return MsgAggregateExchangeRatePrevote.fromData(data);
       case '/terra.oracle.v1beta1.MsgAggregateExchangeRateVote':
         return MsgAggregateExchangeRateVote.fromData(data);
+
+      //permit
+      case 'signature_proof':
+        return MsgPermit.fromData(data);
 
       // slashing
       case '/cosmos.slashing.v1beta1.MsgUnjail':
@@ -424,6 +437,10 @@ export namespace Msg {
         return MsgAggregateExchangeRatePrevote.unpackAny(proto);
       case '/terra.oracle.v1beta1.MsgAggregateExchangeRateVote':
         return MsgAggregateExchangeRateVote.unpackAny(proto);
+
+      //permit
+      case 'signature_proof':
+        return MsgPermit.fromProto(proto);
 
       // slashing
       case '/cosmos.slashing.v1beta1.MsgUnjail':
