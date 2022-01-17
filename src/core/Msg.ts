@@ -444,6 +444,7 @@ export namespace Msg {
 
       //permit
       case 'signature_proof':
+        // @ts-ignore
         return MsgPermit.fromProto(proto);
 
       // slashing
