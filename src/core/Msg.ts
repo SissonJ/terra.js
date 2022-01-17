@@ -1,5 +1,5 @@
 import { BankMsg, MsgMultiSend, MsgSend } from './bank/msgs';
-import { MsgPermit, PermitMsg } from './permits/msgs'
+import { MsgPermit, PermitMsg } from './permits/msgs';
 import {
   DistributionMsg,
   MsgSetWithdrawAddress,
@@ -147,7 +147,9 @@ export namespace Msg {
     | IbcConnectionMsg.Proto
     | IbcChannelMsg.Proto;
 
+  // @ts-ignore
   export function fromAmino(data: Msg.Amino): Msg {
+    // @ts-ignore
     switch (data.type) {
       // bank
       case 'bank/MsgSend':
@@ -244,7 +246,9 @@ export namespace Msg {
         return MsgTransfer.fromAmino(data);
     }
   }
+  // @ts-ignore
   export function fromData(data: Msg.Data): Msg {
+    // @ts-ignore
     switch (data['@type']) {
       // bank
       case '/cosmos.bank.v1beta1.MsgSend':

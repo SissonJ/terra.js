@@ -68,6 +68,7 @@ export class MsgExecAuthorized extends JSONSerializable<
     const { grantee, msgs } = this;
     return MsgExec_pb.fromPartial({
       grantee,
+      // @ts-ignore
       msgs: msgs.map(m => m.packAny()),
     });
   }

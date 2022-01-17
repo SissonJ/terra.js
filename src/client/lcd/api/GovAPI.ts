@@ -139,9 +139,11 @@ export class GovAPI extends BaseAPI {
   public async proposer(proposalId: number): Promise<AccAddress> {
     const creationTx = await this.searchProposalCreationTx(proposalId);
     const msg = creationTx.body.messages.find(
+      // @ts-ignore
       msg => msg['@type'] === '/cosmos.gov.v1beta1.MsgSubmitProposal'
     );
 
+    // @ts-ignore
     if (msg && msg['@type'] === '/cosmos.gov.v1beta1.MsgSubmitProposal') {
       return msg.proposer;
     }
@@ -156,9 +158,11 @@ export class GovAPI extends BaseAPI {
   public async initialDeposit(proposalId: number): Promise<Coins> {
     const creationTx = await this.searchProposalCreationTx(proposalId);
     const msg = creationTx.body.messages.find(
+      // @ts-ignore
       msg => msg['@type'] === '/cosmos.gov.v1beta1.MsgSubmitProposal'
     );
 
+    // @ts-ignore
     if (msg && msg['@type'] === '/cosmos.gov.v1beta1.MsgSubmitProposal') {
       return Coins.fromData(msg.initial_deposit);
     }
@@ -206,6 +210,7 @@ export class GovAPI extends BaseAPI {
         d.txs.map(tx =>
           tx.body.messages.forEach(msg => {
             if (
+              // @ts-ignore
               msg['@type'] === '/cosmos.gov.v1beta1.MsgDeposit' &&
               Number.parseInt(msg.proposal_id) == proposalId
             ) {
@@ -277,6 +282,7 @@ export class GovAPI extends BaseAPI {
         d.txs.map(tx =>
           tx.body.messages.forEach(msg => {
             if (
+              // @ts-ignore
               msg['@type'] === '/cosmos.gov.v1beta1.MsgVote' &&
               Number.parseInt(msg.proposal_id) == proposalId
             ) {
@@ -286,6 +292,7 @@ export class GovAPI extends BaseAPI {
                 ])
               );
             } else if (
+              // @ts-ignore
               msg['@type'] === '/cosmos.gov.v1beta1.MsgVoteWeighted' &&
               Number.parseInt(msg.proposal_id) == proposalId
             ) {

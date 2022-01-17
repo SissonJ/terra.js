@@ -194,6 +194,7 @@ export class TxBody {
   public toProto(): TxBody.Proto {
     return TxBody_pb.fromPartial({
       memo: this.memo,
+      // @ts-ignore
       messages: this.messages.map(m => m.packAny()),
       timeoutHeight: Long.fromNumber(this.timeout_height ?? 0),
     });
