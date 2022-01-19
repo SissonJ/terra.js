@@ -9,7 +9,7 @@ export class MsgPermit extends JSONSerializable<
     public address: string,
     public amount: string,
     public contract: string,
-    public index: string,
+    public index: number,
     public key: string
   ) {
     super();
@@ -39,7 +39,7 @@ export class MsgPermit extends JSONSerializable<
 
   // @ts-ignore
   public static fromData(data: MsgPermit.Data): MsgPermit {
-    return new MsgPermit('', '', '', '', '');
+    return new MsgPermit('', '', '', 0, '');
   }
 
   public toData(): MsgPermit.Data {
@@ -51,7 +51,7 @@ export class MsgPermit extends JSONSerializable<
 
   // @ts-ignore
   public static fromProto(data: MsgPermit.Proto): MsgPermit {
-    return new MsgPermit('', '', '', '', '');
+    return new MsgPermit('', '', '', 0, '');
   }
 
   public toProto(): MsgPermit.Proto {
@@ -66,7 +66,7 @@ export namespace MsgPermit {
       address: string;
       amount: string;
       contract: string;
-      index: string;
+      index: number;
       key: string;
     };
   }
