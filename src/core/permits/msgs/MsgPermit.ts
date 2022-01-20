@@ -43,9 +43,14 @@ export class MsgPermit extends JSONSerializable<
   }
 
   public toData(): MsgPermit.Data {
+    const { address, amount, contract, index, key} = this;
     return {
       '@type': 'signature_proof',
-      account: '',
+      address,
+      amount,
+      contract,
+      index,
+      key,
     };
   }
 
@@ -72,7 +77,11 @@ export namespace MsgPermit {
   }
   export interface Data {
     '@type': 'signature_proof';
-    account: string;
+    address: string;
+    amount: string;
+    contract: string;
+    index: number;
+    key: string;
   }
   export type Proto = '';
 }
