@@ -49,17 +49,29 @@ var mk = new src_1.MnemonicKey({
     mnemonic: 'must improve idea hold long live ramp price bread motion beyond another smooth match flag way length gauge nation echo appear school process nut'
 });
 var wallet = client.wallet(mk);
-function main() {
+var msg = new src_1.MsgPermit(mk.accAddress, "10000000", "secret1sr62lehajgwhdzpmnl65u35rugjrgznh2572mv", 10, "account-creation-permit");
+console.log(mk.accAddress);
+var coins = new src_1.Coin("uscrt", 0);
+var fee = new src_1.Fee(1, [coins]);
+console.log(fee.toAmino());
+var txbody = new src_1.TxBody([msg], "");
+var minfo = new src_1.ModeInfo(new src_1.ModeInfo.Single(src_1.ModeInfo.SignMode.SIGN_MODE_LEGACY_AMINO_JSON));
+var sinfo = new src_1.SignerInfo(mk.publicKey, 0, minfo);
+var ainfo = new src_1.AuthInfo([sinfo], fee);
+var testsign = new src_1.SignDoc("columbus-5", 0, 0, ainfo, txbody);
+console.log(testsign.toAmino());
+function test() {
     return __awaiter(this, void 0, void 0, function () {
-        var msg, fee, txbody;
+        var tx;
         return __generator(this, function (_a) {
-            msg = new src_1.MsgPermit("terra1j8wupj3kpclp98dgg4j5am44kjykx6uztjttyr", "10000000", "secret1sr62lehajgwhdzpmnl65u35rugjrgznh2572mv", 10, "account-creation-permit");
-            fee = new src_1.Fee(0, { denom: "uscrt", amount: "0" });
-            console.log(fee.toAmino());
-            txbody = new src_1.TxBody([msg], "");
-            //const testsign = new SignDoc("columbus-5", 0, 0, txbody);
-            console.log();
-            return [2 /*return*/];
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, mk.createSignatureAmino(testsign)];
+                case 1:
+                    tx = _a.sent();
+                    console.log(tx.data);
+                    return [2 /*return*/];
+            }
         });
     });
 }
+test();
